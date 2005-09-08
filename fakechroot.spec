@@ -34,11 +34,16 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/scripts
+cp -a doc/[!M]* $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
+cp -a scripts/[!M]* $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/scripts
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc %{_docdir}/%{name}-%{version}/*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}
 %attr(755,root,root) %{_libdir}/libfakechroot.so
