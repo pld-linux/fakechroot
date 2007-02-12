@@ -1,5 +1,5 @@
 Summary:	Provides a fake chroot environment to programs
-Summary(pl.UTF-8):   Fałszywe środowisko chroot dla programów
+Summary(pl.UTF-8):	Fałszywe środowisko chroot dla programów
 Name:		fakechroot
 Version:	2.3
 Release:	1
