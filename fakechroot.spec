@@ -1,5 +1,5 @@
 Summary:	Provides a fake chroot environment to programs
-Summary(pl):	Fa³szywe ¶rodowisko chroot dla programów
+Summary(pl.UTF-8):   FaÅ‚szywe Å›rodowisko chroot dla programÃ³w
 Name:		fakechroot
 Version:	2.3
 Release:	1
@@ -21,14 +21,14 @@ chroot'ed system using a standard non-root user account. You can then
 use the apt-get command to install other packages without root
 privileges.
 
-%description -l pl
-fakechroot udostêpnia fa³szywe ¶rodowisko chroot dla programów.
-Fa³szywy chroot umo¿liwia uruchamianie programów wymagaj±cych
-uprawnieñ roota ze zwyk³ego konta u¿ytkownika. Mo¿na na przyk³ad
-tworzyæ bootstrap Debiana lub ¶rodowisko programistyczne i budowaæ
-pakiety wewn±trz chrootowanego systemu przy u¿yciu zwyk³ego konta.
-Mo¿na nastêpnie u¿yæ polecenia apt-get do zainstalowania innych
-pakietów bez uprawnieñ roota.
+%description -l pl.UTF-8
+fakechroot udostÄ™pnia faÅ‚szywe Å›rodowisko chroot dla programÃ³w.
+FaÅ‚szywy chroot umoÅ¼liwia uruchamianie programÃ³w wymagajÄ…cych
+uprawnieÅ„ roota ze zwykÅ‚ego konta uÅ¼ytkownika. MoÅ¼na na przykÅ‚ad
+tworzyÄ‡ bootstrap Debiana lub Å›rodowisko programistyczne i budowaÄ‡
+pakiety wewnÄ…trz chrootowanego systemu przy uÅ¼yciu zwykÅ‚ego konta.
+MoÅ¼na nastÄ™pnie uÅ¼yÄ‡ polecenia apt-get do zainstalowania innych
+pakietÃ³w bez uprawnieÅ„ roota.
 
 %prep
 %setup -q
