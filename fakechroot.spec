@@ -1,16 +1,17 @@
 Summary:	Provides a fake chroot environment to programs
 Summary(pl.UTF-8):	Fałszywe środowisko chroot dla programów
 Name:		fakechroot
-Version:	2.3
+Version:	2.20.1
 Release:	1
-License:	GPL
+License:	LGPL v2.1+
 Group:		Development/Tools
-Source0:	http://ftp.debian.org/debian/pool/main/f/fakechroot/%{name}_%{version}.tar.gz
-# Source0-md5:	9df72412f6a209a63bdac02d3088d604
-URL:		http://fakechroot.alioth.debian.org/
+Source0:	https://github.com/dex4er/fakechroot/releases/download/%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	bf67c9b3a5f282f310ba8beda2fc6057
+Patch0:		statx.patch
+Patch1:		glibc-2.34.patch
+BuildRequires:	perl-tools-pod
+URL:		https://github.com/dex4er/fakechroot
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_libdir		%{_prefix}/%{_lib}/libfakechroot
 
 %description
 fakechroot provides a fake chroot environment to programs. A fake
@@ -32,10 +33,14 @@ pakietów bez uprawnień roota.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 %configure \
+	--disable-silent-rules \
 	--disable-static
+
 %{__make}
 
 %install
@@ -44,17 +49,18 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/scripts
-cp -a doc/[!M]* $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
-cp -a scripts/[!M]* $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/scripts
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/fakechroot/libfakechroot.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc %{_docdir}/%{name}-%{version}/*
-%attr(755,root,root) %{_bindir}/*
-%dir %{_libdir}
-%attr(755,root,root) %{_libdir}/libfakechroot.so
-%{_mandir}/man1/*
+%doc NEWS.md README.md THANKS.md scripts/*{.sh,.env,fakechroot,.pl}
+%attr(755,root,root) %{_bindir}/env.fakechroot
+%attr(755,root,root) %{_bindir}/fakechroot
+%attr(755,root,root) %{_bindir}/ldd.fakechroot
+%attr(755,root,root) %{_sbindir}/chroot.fakechroot
+%dir %{_libdir}/fakechroot
+%attr(755,root,root) %{_libdir}/fakechroot/libfakechroot.so
+%{_mandir}/man1/fakechroot.1*
